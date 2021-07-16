@@ -128,15 +128,12 @@ def plot_weights_given_ax(ax, array,
     ax.yaxis.label.set_fontsize(15)
 
 
-def plot_weights(array,
-                 figsize=(20,2),
-                 **kwargs):
+def plot_weights(filepath, array, figsize=(20,2), **kwargs):
     fig = plt.figure(figsize=figsize)
     ax = fig.add_subplot(111) 
     plot_weights_given_ax(ax=ax, array=array,**kwargs)
     plt.show()
-    return ax
-
+    plt.savefig(filepath)
 
 def plot_score_track_given_ax(arr, ax, threshold=None, **kwargs):
     ax.plot(np.arange(len(arr)), arr, **kwargs)
