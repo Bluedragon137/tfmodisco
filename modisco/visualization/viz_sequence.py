@@ -135,6 +135,7 @@ def plot_weights(array,
     ax = fig.add_subplot(111) 
     plot_weights_given_ax(ax=ax, array=array,**kwargs)
     plt.show()
+    return ax
 
 
 def plot_score_track_given_ax(arr, ax, threshold=None, **kwargs):
