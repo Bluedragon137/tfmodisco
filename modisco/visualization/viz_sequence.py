@@ -129,7 +129,7 @@ def plot_weights_given_ax(ax, array,
     ax.yaxis.label.set_fontsize(15)
 
 
-def plot_weights(array, filepath, title, minval, maxval, figsize=(20,2)):
+def plot_weights(array, filepath, title, minval, maxval, color, figsize=(20,2)):
     fig = plt.figure(figsize=figsize)
     ax = fig.add_subplot(111)
     plot_weights_given_ax(ax=ax, array=array, subticks_frequency=20)
@@ -137,7 +137,7 @@ def plot_weights(array, filepath, title, minval, maxval, figsize=(20,2)):
     plt.ylim(minval, maxval)
     currentAxis = plt.gca()
     totallength = array.shape[0]
-    currentAxis.add_patch(Rectangle((totallength/2 - .5, minval), 1, maxval-minval, facecolor="grey", alpha=0.5))
+    currentAxis.add_patch(Rectangle((totallength/2 - .5, minval), 1, maxval-minval, facecolor=color, alpha=0.5))
     plt.savefig(filepath)
 
 def plot_score_track_given_ax(arr, ax, threshold=None, **kwargs):
