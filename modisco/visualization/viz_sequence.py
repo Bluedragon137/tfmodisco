@@ -4,6 +4,10 @@ from matplotlib.patches import Rectangle
 import numpy as np
 from .. import util
 
+from PIL import Image
+import base64
+import io
+
 
 def ic_scale(pwm,background):
     per_position_ic = util.compute_per_position_ic(
@@ -138,7 +142,18 @@ def plot_weights(array, filepath, title, minval, maxval, color, figsize=(20,2)):
     currentAxis = plt.gca()
     totallength = array.shape[0]
     currentAxis.add_patch(Rectangle((totallength/2 - .5, minval), 1, maxval-minval, facecolor=color, alpha=0.5))
-    plt.savefig(filepath)
+    return fig_to_img(plt.gcf())
+    #plt.savefig(filepath)
+
+def fig_to_img(fig):
+    buf = io.BytesIO()
+    data = io.BytesIO()
+    fig.savefig(buf)
+    buf.seek(0)
+    img = Image.open(buf)
+    img.save(data, "PNG")
+    encoded_img_data = base64.b64encode(data.getvalue())
+    return encoded_img_data
 
 def plot_score_track_given_ax(arr, ax, threshold=None, **kwargs):
     ax.plot(np.arange(len(arr)), arr, **kwargs)
