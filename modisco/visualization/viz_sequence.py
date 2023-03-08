@@ -142,8 +142,8 @@ def plot_weights(array, filepath, title, minval, maxval, color, figsize=(20,2)):
     currentAxis = plt.gca()
     totallength = array.shape[0]
     currentAxis.add_patch(Rectangle((totallength/2 - .5, minval), 1, maxval-minval, facecolor=color, alpha=0.5))
-    return fig_to_img(plt.gcf())
-    #plt.savefig(filepath)
+    #return fig_to_img(plt.gcf())
+    plt.savefig(filepath, format='svg')
 
 def fig_to_img(fig):
     buf = io.BytesIO()
@@ -167,5 +167,3 @@ def plot_score_track(arr, threshold=None, figsize=(20,2), **kwargs):
     ax = fig.add_subplot(111) 
     plot_score_track_given_ax(arr, threshold=threshold, ax=ax, **kwargs) 
     plt.show()
-
-
